@@ -168,6 +168,50 @@ with st.expander("Model information"):
         f"Number of input features: **{len(FEATURE_COLUMNS)}**"
     )
 
+# ============================================================
+# INPUT DATA FORMAT
+# ============================================================
+
+with st.expander("Input data format"):
+    
+    st.markdown("""
+    Upload a CSV file containing a trajectory pair (Vehicle *i* and Vehicle *j*)
+    sampled over time. Each row should represent a timestamp of the interaction.
+
+    **Required columns:**
+
+    - `timestamp`
+    - `x_i`, `y_i`
+    - `vx_i`, `vy_i`
+    - `hx_i`, `hy_i`
+    - `acc_i`
+    - `length_i`, `width_i`
+    - `x_j`, `y_j`
+    - `vx_j`, `vy_j`
+    - `hx_j`, `hy_j`
+    - `acc_j`
+    - `length_j`, `width_j`
+    - `TTC`, `DRAC`, `MTTC`
+
+    Additional columns are allowed and will be ignored if not required by the model.
+
+    **Example structure:**
+    """)
+
+    st.code(
+        """
+timestamp,x_i,y_i,vx_i,vy_i,hx_i,hy_i,acc_i,length_i,width_i,x_j,y_j,vx_j,vy_j,hx_j,hy_j,acc_j,length_j,width_j,TTC,DRAC,MTTC
+1669899871,314730.7076,-27.5247,76.7586,-0.6481,0.99996,-0.00844,0.7221,20.83,6.88,314781.2163,-46.1953,61.1300,5.7017,0.99568,0.09287,-1.6149,67.11,11.08,1.706,4.943,1.542
+1669899871,314733.7785,-27.5495,76.7875,-0.6413,0.99997,-0.00835,0.7222,20.83,6.88,314783.6632,-45.9987,61.0706,5.6404,0.99576,0.09197,-1.6212,67.11,11.08,1.682,5.031,1.522
+        """,
+        language="csv"
+    )
+
+    st.info(
+        "The uploaded file should contain exactly one vehicle interaction "
+        "(one trajectory pair) covering the complete conflict event."
+    )
+
 
 # ============================================================
 # LOAD TRAJECTORY DATA
